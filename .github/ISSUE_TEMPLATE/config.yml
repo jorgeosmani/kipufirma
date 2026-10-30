@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Reportar una vulnerabilidad (privado)
+    url: https://github.com/jorgeosmani/kipufirma/security/advisories/new
+    about: No publique fallos de seguridad en issues abiertos.
+  - name: Validador oficial FirmaEC
+    url: https://www.firmadigital.gob.ec/
+    about: Para validar legalmente un documento firmado.

@@ -1,0 +1,8 @@
+# Dependencias de ejecución con versiones fijadas (probadas juntas).
+# Actualice con cuidado y ejecute toda la suite + validación oficial (docs/PRUEBAS_ACEPTACION.md).
+pyhanko==0.38.0
+pyhanko-certvalidator==0.33.0
+cryptography==50.0.2
+pypdfium2==5.6.0
+qrcode==8.2
+PySide6-Essentials==6.12.0

@@ -1,0 +1,18 @@
+# Metadatos de versión del ejecutable de Windows (Propiedades > Detalles).
+# Mantener sincronizado con src/kipufirma/__init__.py (scripts/compilar_windows.ps1 lo actualiza).
+VSVersionInfo(
+  ffi=FixedFileInfo(filevers=(1, 0, 0, 0), prodvers=(1, 0, 0, 0), mask=0x3f, flags=0x0, OS=0x40004,
+                    fileType=0x1, subtype=0x0, date=(0, 0)),
+  kids=[
+    StringFileInfo([StringTable('040A04B0', [
+      StringStruct('CompanyName', 'Jorge Osmani Ordonez Ordonez'),
+      StringStruct('FileDescription', 'KipuFirma - Firma electrónica de PDF (Ecuador)'),
+      StringStruct('FileVersion', '1.0.0'),
+      StringStruct('InternalName', 'KipuFirma'),
+      StringStruct('LegalCopyright', 'AGPL-3.0-or-later'),
+      StringStruct('OriginalFilename', 'KipuFirma.exe'),
+      StringStruct('ProductName', 'KipuFirma'),
+      StringStruct('ProductVersion', '1.0.0')])]),
+    VarFileInfo([VarStruct('Translation', [0x040A, 1200])])
+  ]
+)

@@ -1,0 +1,41 @@
+# ---------- NUNCA subir certificados ni claves ----------
+*.p12
+*.pfx
+*.key
+*.pem.key
+*.jks
+*.keystore
+**/anclas_adicionales/
+# (los .pem públicos de src/kipufirma/resources/trust SÍ se versionan)
+
+# ---------- Documentos de usuario ----------
+firmados/
+*-firmado*.pdf
+*-signed*.pdf
+informe*.csv
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# ---------- Compilación ----------
+build/
+dist/
+*.spec.bak
+
+# ---------- Sistema / editores ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp

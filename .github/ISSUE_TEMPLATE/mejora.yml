@@ -1,0 +1,14 @@
+name: Proponer una mejora
+description: Nueva función o cambio de comportamiento
+labels: [mejora]
+body:
+  - type: textarea
+    id: problema
+    attributes: {label: ¿Qué problema resuelve?}
+    validations: {required: true}
+  - type: textarea
+    id: propuesta
+    attributes: {label: Propuesta}
+  - type: textarea
+    id: legal
+    attributes: {label: ¿Afecta la validez legal o la compatibilidad con FirmaEC?}

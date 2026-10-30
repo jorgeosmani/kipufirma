@@ -1,0 +1,6 @@
+-r requirements.txt
+pytest==9.2.0
+pypdf==5.9.0
+ruff>=0.6
+pip-audit>=2.7
+pyinstaller>=6.10

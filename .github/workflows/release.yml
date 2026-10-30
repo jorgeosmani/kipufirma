@@ -1,0 +1,42 @@
+name: Publicar versión
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install -r requirements-dev.txt && pip install -e . --no-deps
+      - run: pytest -q
+      - name: Ejecutable (PyInstaller)
+        run: pyinstaller packaging/kipufirma.spec --noconfirm --clean --distpath dist --workpath build
+      - name: Instalador (Inno Setup)
+        shell: pwsh
+        run: |
+          choco install innosetup --no-progress -y
+          $v = "${{ github.ref_name }}".TrimStart('v')
+          & "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe" "/DAppVersion=$v" packaging\kipufirma.iss
+      - name: Portable ZIP y huellas
+        shell: pwsh
+        run: |
+          $v = "${{ github.ref_name }}".TrimStart('v')
+          Compress-Archive -Path dist\KipuFirma\* -DestinationPath "dist\KipuFirma-$v-portable.zip"
+          Get-ChildItem dist -File | ForEach-Object { "$((Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower())  $($_.Name)" } | Set-Content dist\SHA256SUMS.txt
+      # Recomendado: firmar los .exe con Authenticode (secreto del repositorio) antes de publicar.
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/*-instalador.exe
+            dist/*-portable.zip
+            dist/SHA256SUMS.txt
+          generate_release_notes: true

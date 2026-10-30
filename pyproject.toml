@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kipufirma"
+dynamic = ["version"]
+description = "Firmador electrónico de PDF para Ecuador (PAdES, compatible con FirmaEC): firma por lotes, ubicación por palabra clave y certificado .p12 recordado."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "AGPL-3.0-or-later"
+authors = [
+    { name = "Jorge Osmani Ordonez Ordonez", email = "osmany_o_o@hotmail.com" },
+    { email = "osmani.ordonez99@gmail.com" },
+]
+keywords = ["firma electrónica", "Ecuador", "FirmaEC", "PAdES", "PDF", "p12"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: Microsoft :: Windows :: Windows 11",
+    "Environment :: Win32 (MS Windows)",
+    "Natural Language :: Spanish",
+    "Topic :: Security :: Cryptography",
+    "Topic :: Office/Business",
+]
+dependencies = [
+    "pyhanko>=0.38,<0.40",
+    "pyhanko-certvalidator>=0.33,<0.35",
+    "cryptography>=46",
+    "pypdfium2>=4.30,<6",
+    "qrcode>=7.4",
+    "PySide6-Essentials>=6.7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pypdf>=5", "ruff>=0.6", "pip-audit>=2.7", "pyinstaller>=6.10"]
+
+[project.scripts]
+kipufirma-cli = "kipufirma.cli:main"
+
+[project.gui-scripts]
+kipufirma = "kipufirma.gui.app:main"
+
+[project.urls]
+Documentacion = "https://github.com/jorgeosmani/kipufirma/tree/main/docs"
+Incidencias = "https://github.com/jorgeosmani/kipufirma/issues"
+
+[tool.setuptools.dynamic]
+version = { attr = "kipufirma.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+kipufirma = ["resources/trust/*.pem", "resources/trust/manifest.json", "resources/icons/*.png"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "S"]
+ignore = ["S101", "E501", "B008", "S603", "S607"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S", "B"]
