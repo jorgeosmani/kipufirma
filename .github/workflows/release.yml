@@ -33,7 +33,7 @@ jobs:
           Compress-Archive -Path dist\KipuFirma\* -DestinationPath "dist\KipuFirma-$v-portable.zip"
           Get-ChildItem dist -File | ForEach-Object { "$((Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower())  $($_.Name)" } | Set-Content dist\SHA256SUMS.txt
       # Recomendado: firmar los .exe con Authenticode (secreto del repositorio) antes de publicar.
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         with:
           files: |
             dist/*-instalador.exe
